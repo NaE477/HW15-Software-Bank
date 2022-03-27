@@ -4,8 +4,8 @@ import entities.*;
 import util.Date;
 
 public interface Borrow {
-    void borrow(Date borrowDate, Person person, Disk disk);
-    Integer delivery(Date deliveryDate,Person person,Disk disk);
+    Rent borrow(Person person,Disk disk , Date borrowDate);
+    Integer delivery(Person person,Disk disk,Date deliveryDate);
     Disk getDisk(String diskName);
     Boolean isLate(Date deliveryDate);
     Date getDate();

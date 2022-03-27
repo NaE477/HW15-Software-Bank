@@ -1,20 +1,31 @@
 package controllers.impls;
 
 import controllers.Borrow;
+import controllers.DateUtil;
 import entities.Disk;
 import entities.Person;
+import entities.Rent;
 import util.Date;
 
-public class BorrowImpl implements Borrow {
-    @Override
-    public void borrow(Date borrowDate, Person person, Disk disk) {
+import javax.persistence.EntityManagerFactory;
 
+public class BorrowImpl implements Borrow {
+    private final EntityManagerFactory factory;
+
+    public BorrowImpl(EntityManagerFactory factory) {
+        this.factory = factory;
     }
 
     @Override
-    public Integer delivery(Date deliveryDate, Person person, Disk disk) {
+    public Rent borrow(Person person,Disk disk , Date borrowDate) {
+        return new Rent(person,disk, DateUtil.customDateToLocalDate(borrowDate));
+    }
+
+    @Override
+    public Integer delivery(Person person, Disk disk, Date deliveryDate) {
         return null;
     }
+
 
     @Override
     public Disk getDisk(String diskName) {

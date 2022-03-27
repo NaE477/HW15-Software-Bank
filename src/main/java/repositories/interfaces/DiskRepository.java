@@ -1,7 +1,7 @@
 package repositories.interfaces;
 
-import controllers.Bank;
+import entities.Disk;
 import repositories.interfaces.base.BaseRepository;
 
-public interface BankRepository extends BaseRepository<Bank> {
+public interface DiskRepository extends BaseRepository<Disk> {
 }

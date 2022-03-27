@@ -8,10 +8,10 @@ import java.time.temporal.ChronoUnit;
 public class DateUtil {
 
     public static Long getDifference(Date from,Date to) {
-        return ChronoUnit.DAYS.between(jalaliToGregorian(from),jalaliToGregorian(to));
+        return ChronoUnit.DAYS.between(customDateToLocalDate(from), customDateToLocalDate(to));
     }
 
-    private static Date gregorianToJalali(LocalDate gregorianDate) {
+    public static Date localDatToCustomDate(LocalDate gregorianDate) {
         int gregorianYear = gregorianDate.getYear();
         int gregorianMonth = gregorianDate.getMonthValue();
         int gregorianDay = gregorianDate.getDayOfMonth();
@@ -39,10 +39,10 @@ public class DateUtil {
         return new Date(jalaliYear, jalaliMonth, jalaliDay);
     }
 
-    private static LocalDate jalaliToGregorian(Date jalaliDate) {
-        Integer jalaliYear = jalaliDate.getYear();
-        Integer jalaliMonth = jalaliDate.getMonth();
-        Integer jalaliDay = jalaliDate.getDay();
+    public static LocalDate customDateToLocalDate(Date customDate) {
+        Integer jalaliYear = customDate.getYear();
+        Integer jalaliMonth = customDate.getMonth();
+        Integer jalaliDay = customDate.getDay();
         jalaliYear += 1595;
         int days = -355668 + (365 * jalaliYear) + ((jalaliYear / 33) * 8) + (((jalaliYear % 33) + 3) / 4) + jalaliDay + ((jalaliMonth < 7) ? (jalaliMonth - 1) * 31 : ((jalaliMonth - 7) * 30) + 186);
         int gregorianYear = 400 * (days / 146097);
