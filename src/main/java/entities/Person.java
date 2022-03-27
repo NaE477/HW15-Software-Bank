@@ -14,11 +14,10 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Person extends BaseEntity<Integer> {
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
-
-    private PersonType personType;
 
     @OneToMany(mappedBy = "person")
     private List<Rent> rents;

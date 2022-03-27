@@ -11,7 +11,6 @@
         <class>entities.base.BaseEntity</class>
         <class>entities.Disk</class>
         <class>entities.Person</class>
-        <class>entities.PersonType</class>
         <class>entities.Rent</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

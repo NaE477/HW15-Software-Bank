@@ -1,12 +1,12 @@
 package services.impls;
 
 import entities.Person;
-import repositories.interfaces.PersonRepository;
-import services.impls.base.BaseServiceImpl;
+import repositories.interfaces.base.BasePersonRepository;
+import services.impls.base.BasePersonServiceImpl;
 import services.interfaces.PersonService;
 
-public class PersonServiceImpl extends BaseServiceImpl<Person,PersonRepository> implements PersonService {
-    public PersonServiceImpl(PersonRepository repository) {
+public class PersonServiceImpl extends BasePersonServiceImpl<Person> implements PersonService {
+    public PersonServiceImpl(BasePersonRepository<Person> repository) {
         super(repository);
     }
 }

@@ -36,6 +36,7 @@ public class BorrowImpl implements Borrow {
     @Override
     public Long delivery(Person person, Disk disk, Date deliveryDate) {
         Rent toDeliver = rentService.findByPersonAndDisk(person,disk);
+        rentService.delete(toDeliver);
         if (isLate(toDeliver.getBorrowDate())){
             return ChronoUnit.DAYS.between(getDate(deliveryDate),LocalDate.now()) - 7 * fine;
         } else return 0L;
