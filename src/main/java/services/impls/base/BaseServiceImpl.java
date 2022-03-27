@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class BaseServiceImpl<T extends BaseEntity<Integer>
         , R extends BaseRepository<T>>
         implements BaseService<T> {
-    final R repository;
+    protected final R repository;
 
     @Override
     public T insert(T t) {

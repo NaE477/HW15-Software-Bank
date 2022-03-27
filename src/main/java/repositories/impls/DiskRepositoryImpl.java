@@ -10,4 +10,14 @@ public class DiskRepositoryImpl extends BaseRepositoryImpl<Disk> implements Disk
     public DiskRepositoryImpl(EntityManagerFactory entityManagerFactory, Class<Disk> clazz) {
         super(entityManagerFactory, clazz);
     }
+
+    @Override
+    public Disk readByDiskName(String diskName) {
+        return super
+                .getEntityManagerFactory()
+                .createEntityManager()
+                .createQuery("select d from Disk d where d.diskName = :diskName",Disk.class)
+                .setParameter("diskName",diskName)
+                .getSingleResult();
+    }
 }

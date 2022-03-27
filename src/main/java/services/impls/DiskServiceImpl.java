@@ -9,4 +9,9 @@ public class DiskServiceImpl extends BaseServiceImpl<Disk, DiskRepository> imple
     public DiskServiceImpl(DiskRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Disk findByDiskName(String diskName) {
+        return repository.readByDiskName(diskName);
+    }
 }
