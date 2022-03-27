@@ -1,4 +1,4 @@
-package repositories.interfaces;
+package repositories.interfaces.base;
 
 import entities.Person;
 

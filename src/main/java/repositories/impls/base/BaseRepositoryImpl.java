@@ -1,10 +1,10 @@
-package repositories.impls;
+package repositories.impls.base;
 
 import entities.base.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
-import repositories.interfaces.BaseRepository;
+import repositories.interfaces.base.BaseRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

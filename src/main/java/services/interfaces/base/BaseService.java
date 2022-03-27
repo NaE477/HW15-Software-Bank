@@ -1,4 +1,4 @@
-package services.interfaces;
+package services.interfaces.base;
 
 import entities.base.BaseEntity;
 

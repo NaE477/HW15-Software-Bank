@@ -1,7 +1,7 @@
-package repositories.impls;
+package repositories.impls.base;
 
 import entities.Person;
-import repositories.interfaces.BasePersonRepository;
+import repositories.interfaces.base.BasePersonRepository;
 
 import javax.persistence.EntityManagerFactory;
 

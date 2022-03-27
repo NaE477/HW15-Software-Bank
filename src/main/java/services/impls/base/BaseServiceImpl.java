@@ -1,9 +1,9 @@
-package services.impls;
+package services.impls.base;
 
 import entities.base.BaseEntity;
 import lombok.RequiredArgsConstructor;
-import repositories.interfaces.BaseRepository;
-import services.interfaces.BaseService;
+import repositories.interfaces.base.BaseRepository;
+import services.interfaces.base.BaseService;
 
 import java.util.List;
 
