@@ -30,15 +30,16 @@ public class BorrowImpl implements Borrow {
 
     @Override
     public Rent borrow(Person person,Disk disk , Date borrowDate) {
-        return rentService.insert(new Rent(person,disk, DateUtil.customDateToLocalDate(borrowDate)));
+        return rentService.insert(new Rent(person,disk, DateUtil.customDateToLocalDate(borrowDate),null));
     }
 
     @Override
-    public Long delivery(Person person, Disk disk, Date deliveryDate) {
+    public Long delivery(Person person, Disk disk,Date deliveryDate) {
         Rent toDeliver = rentService.findByPersonAndDisk(person,disk);
-        rentService.delete(toDeliver);
-        if (isLate(toDeliver.getBorrowDate())){
-            return ChronoUnit.DAYS.between(getDate(deliveryDate),LocalDate.now()) - 7 * fine;
+        toDeliver.setDeliveryDate(DateUtil.customDateToLocalDate(deliveryDate));
+        rentService.update(toDeliver);
+        if (isLate(toDeliver.getBorrowDate(),toDeliver.getDeliveryDate())){
+            return ChronoUnit.DAYS.between(toDeliver.getBorrowDate(),toDeliver.getDeliveryDate()) - 7 * fine;
         } else return 0L;
     }
 
@@ -50,8 +51,9 @@ public class BorrowImpl implements Borrow {
     }
 
     @Override
-    public Boolean isLate(LocalDate deliveryDate) {
-        return ChronoUnit.DAYS.between(deliveryDate,LocalDate.now()) <= 7;
+    public Boolean isLate(LocalDate borrowingDate,LocalDate deliveryDate) {
+        long d = ChronoUnit.DAYS.between(borrowingDate,deliveryDate);
+        return ChronoUnit.DAYS.between(borrowingDate,deliveryDate) > 7;
     }
 
     @Override

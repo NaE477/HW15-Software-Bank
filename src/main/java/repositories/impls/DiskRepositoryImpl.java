@@ -13,11 +13,15 @@ public class DiskRepositoryImpl extends BaseRepositoryImpl<Disk> implements Disk
 
     @Override
     public Disk readByDiskName(String diskName) {
-        return super
-                .getEntityManagerFactory()
-                .createEntityManager()
-                .createQuery("select d from Disk d where d.diskName = :diskName",Disk.class)
-                .setParameter("diskName",diskName)
-                .getSingleResult();
+        try {
+            return super
+                    .getEntityManagerFactory()
+                    .createEntityManager()
+                    .createQuery("select d from Disk d where d.diskName = :diskName", Disk.class)
+                    .setParameter("diskName", diskName)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

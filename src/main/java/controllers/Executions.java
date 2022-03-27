@@ -14,7 +14,6 @@ import services.interfaces.PersonService;
 import util.Date;
 
 import javax.persistence.EntityManagerFactory;
-import java.time.LocalDate;
 import java.util.*;
 
 public class Executions {
@@ -28,8 +27,8 @@ public class Executions {
         List<String> diskNames = new ArrayList<>();
         Map<String, Long> personsAndFines = new HashMap<>();
         System.out.println("Enter [occurrence] [fine],e.g. 8 8500:");
-        String occAndFine = sc.nextLine();
         while (true) {
+            String occAndFine = sc.nextLine();
             if (isOccurrencesAndFineCorrect(occAndFine)) {
                 occurrences = Integer.parseInt(occAndFine.split(" ")[0]);
                 fine = Long.parseLong(occAndFine.split(" ")[1]);
@@ -37,7 +36,8 @@ public class Executions {
                 break;
             } else System.out.println("Wrong occurrence and fine format.");
         }
-        for (int i = 0; i < occurrences; ) {
+        for (int i = 1; i <= occurrences; ) {
+            System.out.print("Occurrence" + i + ": ");
             String occurrence = sc.nextLine();
             if (isOccurrenceCorrect(occurrence)) {
                 int year = Integer.parseInt(occurrence.split(" ")[0]);
@@ -67,7 +67,7 @@ public class Executions {
 
     private static Boolean isOccurrencesAndFineCorrect(String userInput) {
         try {
-            if (userInput.split(" ").length < 2) return false;
+            if (userInput.split(" ").length != 2) return false;
             Integer.parseInt(userInput.split(" ")[0]);
             Long.parseLong(userInput.split(" ")[1]);
             return true;
@@ -78,6 +78,7 @@ public class Executions {
 
     private static Boolean isOccurrenceCorrect(String userInput) {
         try {
+            if (userInput.length() == 0) return false;
             if (userInput.split(" ").length != 5) return false;
             int year = Integer.parseInt(userInput.split(" ")[0]);
             int month = Integer.parseInt(userInput.split(" ")[1]);

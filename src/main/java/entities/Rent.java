@@ -27,4 +27,6 @@ public class Rent extends BaseEntity<Integer> {
     private Disk disk;
 
     private LocalDate borrowDate;
+
+    private LocalDate deliveryDate;
 }

@@ -15,12 +15,16 @@ public class RentRepositoryImpl extends BaseRepositoryImpl<Rent> implements Rent
 
     @Override
     public Rent readByPersonAndDisk(Person person, Disk disk) {
-        return super
-                .getEntityManagerFactory()
-                .createEntityManager()
-                .createQuery("select r from Rent r where r.person.id = :personId and r.disk.id = :diskId",Rent.class)
-                .setParameter("personId",person.getId())
-                .setParameter("diskId",disk.getId())
-                .getSingleResult();
+        try {
+            return super
+                    .getEntityManagerFactory()
+                    .createEntityManager()
+                    .createQuery("select r from Rent r where r.person.id = :personId and r.disk.id = :diskId", Rent.class)
+                    .setParameter("personId", person.getId())
+                    .setParameter("diskId", disk.getId())
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
