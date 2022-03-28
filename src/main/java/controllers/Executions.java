@@ -23,7 +23,7 @@ public class Executions {
     public static void main(String[] args) {
         int occurrences;
         long fine;
-        Borrow borrow;
+        Borrow borrowUtil;
         List<String> diskNames = new ArrayList<>();
         Map<String, Long> personsAndFines = new HashMap<>();
         System.out.println("Enter [occurrence] [fine],e.g. 8 8500:");
@@ -32,7 +32,7 @@ public class Executions {
             if (isOccurrencesAndFineCorrect(occAndFine)) {
                 occurrences = Integer.parseInt(occAndFine.split(" ")[0]);
                 fine = Long.parseLong(occAndFine.split(" ")[1]);
-                borrow = new BorrowImpl(factory, fine);
+                borrowUtil = new BorrowImpl(factory, fine);
                 break;
             } else System.out.println("Wrong occurrence and fine format.");
         }
@@ -49,12 +49,15 @@ public class Executions {
                 Disk disk = initialDiskIfNot(diskName);
                 Date date = new Date(year, month, day);
                 if (!isBorrowed(diskNames, diskName)) {
+                    Rent rent = borrowUtil.borrow(person, disk, date);
+                    handleFiningPerson(personsAndFines,username,0L);
                     diskNames.add(diskName);
-                    Rent rent = borrow.borrow(person, disk, date);
+                    System.out.println(person.getUsername() + " rented " + disk.getDiskName());
                 } else {
-                    Long fineToSave = borrow.delivery(person, disk, date);
+                    Long fineToSave = borrowUtil.delivery(person, disk, date);
                     handleFiningPerson(personsAndFines, username, fineToSave);
                     diskNames.remove(diskName);
+                    System.out.println(person.getUsername() + " delivered " + disk.getDiskName() + ",fine: " + fineToSave);
                 }
                 i++;
             } else System.out.println("Wrong Occurrence format.");

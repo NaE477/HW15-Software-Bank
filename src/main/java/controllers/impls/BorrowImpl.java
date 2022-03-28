@@ -39,7 +39,7 @@ public class BorrowImpl implements Borrow {
         toDeliver.setDeliveryDate(DateUtil.customDateToLocalDate(deliveryDate));
         rentService.update(toDeliver);
         if (isLate(toDeliver.getBorrowDate(),toDeliver.getDeliveryDate())){
-            return ChronoUnit.DAYS.between(toDeliver.getBorrowDate(),toDeliver.getDeliveryDate()) - 7 * fine;
+            return (ChronoUnit.DAYS.between(toDeliver.getBorrowDate(),toDeliver.getDeliveryDate()) - 7) * fine;
         } else return 0L;
     }
 
