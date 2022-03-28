@@ -7,10 +7,13 @@ import entities.Person;
 import entities.Rent;
 import repositories.impls.DiskRepositoryImpl;
 import repositories.impls.PersonRepositoryImpl;
+import repositories.impls.RentRepositoryImpl;
 import services.impls.DiskServiceImpl;
 import services.impls.PersonServiceImpl;
+import services.impls.RentServiceImpl;
 import services.interfaces.DiskService;
 import services.interfaces.PersonService;
+import services.interfaces.RentService;
 import util.Date;
 
 import javax.persistence.EntityManagerFactory;
@@ -66,6 +69,7 @@ public class Executions {
         personsAndFines.forEach((p, f) -> System.out.println(p + ": " + f));
         System.out.println("Borrowed Disks: ");
         diskNames.forEach(System.out::println);
+        clearRent();
     }
 
     private static Boolean isOccurrencesAndFineCorrect(String userInput) {
@@ -131,5 +135,10 @@ public class Executions {
             Long previousFine = fines.get(name);
             fines.put(name, previousFine + fine);
         } else fines.put(name, fine);
+    }
+
+    private static void clearRent() {
+        RentService rentService = new RentServiceImpl(new RentRepositoryImpl(factory,Rent.class));
+        rentService.truncate("rent");
     }
 }
